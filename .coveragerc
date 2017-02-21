@@ -1,0 +1,2 @@
+[run]
+omit = discogs_client/tests/*

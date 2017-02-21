@@ -1,30 +1,23 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import unittest
-from discogs_client.tests import DiscogsClientTestCase
+import pytest
+
 from discogs_client.exceptions import HTTPError
 
 
-class FetcherTestCase(DiscogsClientTestCase):
-    def test_memory_fetcher(self):
-        """Client can fetch responses with MemoryFetcher"""
-        self.m.artist(1)
+def test_memory_fetcher(memory_client):
+    """Client can fetch responses with MemoryFetcher"""
+    memory_client.artist(1)
 
-        self.assertRaises(HTTPError, lambda: self.m._get('/500'))
+    with pytest.raises(HTTPError):
+        memory_client._get('/500')
 
-        try:
-            self.m._get('/500')
-        except HTTPError as e:
-            self.assertEqual(e.status_code, 500)
+    try:
+        memory_client._get('/500')
+    except HTTPError as e:
+        assert e.status_code == 500
 
-        self.assertRaises(HTTPError, lambda: self.m.release(1).title)
-        self.assertTrue(self.m._get('/204') is None)
+    with pytest.raises(HTTPError):
+        memory_client.release(1).title
 
-
-def suite():
-    suite = unittest.TestSuite()
-    suite = unittest.TestLoader().loadTestsFromTestCase(FetcherTestCase)
-    return suite
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='suite')
+    assert memory_client._get('/204') is None

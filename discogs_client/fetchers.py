@@ -59,7 +59,7 @@ class UserTokenRequestsFetcher(Fetcher):
         self.user_token = user_token
 
     def fetch(self, client, method, url, data=None, headers=None, json=True):
-        resp = requests.request(method, url, params={'token':self.user_token},
+        resp = requests.request(method, url, params={'token': self.user_token},
                                 data=data, headers=headers)
         return resp.content, resp.status_code
 

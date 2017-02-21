@@ -7,7 +7,8 @@ python:
     - "3.4"
 install:
     - pip install -r requirements.txt
-script:
-    - nosetests --with-coverage --cover-package=discogs_client
+
+script: pytest --cov=discogs_client/ --cov-report=term-missing --cov-config .coveragerc
+
 after_success:
     - coveralls
