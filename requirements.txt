@@ -7,3 +7,4 @@ requests==1.2.3
 oauthlib==0.7.2
 sh==1.08
 pytest>=3.0.0
+pytest-cov>=2.4.0
