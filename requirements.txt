@@ -1,6 +1,6 @@
 six
 PyYAML==3.10
-coverage==3.6
+coverage>=4.3.0
 coveralls==0.2
 docopt==0.6.1
 requests==1.2.3
